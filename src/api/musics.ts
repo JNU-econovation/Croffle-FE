@@ -1,81 +1,83 @@
 export interface PlayListDetailProps {
-  id: number;
+  musicId: number;
   title: string;
   img: string;
-  src: string;
+  musicUrl: string;
 }
 
 export const MUSICS: PlayListDetailProps[] = [
   {
-    id: 1,
+    musicId: 1,
     title: 'Seasons',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl:
+      'https://bucketcroffle.s3.ap-southeast-2.amazonaws.com/music/music84c805e3-9960-49b6-9016-a40e727c718f.wav',
   },
   {
-    id: 2,
+    musicId: 2,
     title: 'Summer',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 3,
+    musicId: 3,
     title: 'Spring',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl:
+      'https://bucketcroffle.s3.ap-southeast-2.amazonaws.com/music/music84c805e3-9960-49b6-9016-a40e727c718f.wav',
   },
   {
-    id: 4,
+    musicId: 4,
     title: 'Fall',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 5,
+    musicId: 5,
     title: 'Winter',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 4,
+    musicId: 4,
     title: 'WonderWall',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 5,
+    musicId: 5,
     title: "Don't Look Back In Anger",
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 6,
+    musicId: 6,
     title: 'Champagne Supernova',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 7,
+    musicId: 7,
     title: 'Live Forever',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 8,
+    musicId: 8,
     title: 'Hello',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 9,
+    musicId: 9,
     title: 'Rolling In The Deep',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
   {
-    id: 10,
+    musicId: 10,
     title: 'Someone Like You',
     img: '../../../src/assets/musicImg.svg',
-    src: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
+    musicUrl: '../../../src/assets/audio/sumu - apart [NCS Release].mp3',
   },
 ];
