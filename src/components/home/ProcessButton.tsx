@@ -1,10 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ProcessButton = () => {
+  const navigate = useNavigate();
+  const onClickProcess = () => {
+    navigate('create');
+  };
   return (
     <ProcessButtonContainer>
       <PlayImg src="../../../src/assets/startImg.png" alt="play" />
-      <ProcessButtonContent>Get Started</ProcessButtonContent>
+      <ProcessButtonContent onClick={onClickProcess}>
+        Get Started
+      </ProcessButtonContent>
     </ProcessButtonContainer>
   );
 };
