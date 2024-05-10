@@ -21,6 +21,7 @@ export const CreateController = () => {
 
 const CreateControllerContainer = styled.div`
   display: flex;
+  margin-left: 8rem;
   flex-direction: row;
   justify-content: center;
   align-items: center;
