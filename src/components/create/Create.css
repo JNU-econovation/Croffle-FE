@@ -1,0 +1,22 @@
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/toggleButton.svg') no-repeat;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  background: url('../../assets/toggle.svg') no-repeat;
+}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import './Create.css';
 
 export const CreateController = () => {
   return (
@@ -6,14 +7,37 @@ export const CreateController = () => {
       <Controller>
         <ControllerTitle>01</ControllerTitle>
         <ControllerSubtitle>스피드</ControllerSubtitle>
+        <MusicSpeedInputContainer>
+          <input className="MusicSpeedInput" type="range" min="1" max="100" />
+        </MusicSpeedInputContainer>
       </Controller>
       <Controller>
         <ControllerTitle>02</ControllerTitle>
         <ControllerSubtitle>분위기</ControllerSubtitle>
+        <MusicMoodButtonContainer>
+          <MusicMoodButton>편안한</MusicMoodButton>
+          <MusicMoodButton>신나는</MusicMoodButton>
+        </MusicMoodButtonContainer>
+        <MusicMoodButtonContainer>
+          <MusicMoodButton>잔잔한</MusicMoodButton>
+          <MusicMoodButton>흥겨운</MusicMoodButton>
+        </MusicMoodButtonContainer>
       </Controller>
       <Controller>
         <ControllerTitle>03</ControllerTitle>
         <ControllerSubtitle>장소</ControllerSubtitle>
+        <MusicPlaceButtonContainer>
+          <MusicPlaceButton>집</MusicPlaceButton>
+          <MusicPlaceButton>카페</MusicPlaceButton>
+        </MusicPlaceButtonContainer>
+        <MusicPlaceButtonContainer>
+          <MusicPlaceButton>산책</MusicPlaceButton>
+          <MusicPlaceButton>운동</MusicPlaceButton>
+        </MusicPlaceButtonContainer>
+        <MusicPlaceButtonContainer>
+          <MusicPlaceButton>산책</MusicPlaceButton>
+          <MusicPlaceButton>운동</MusicPlaceButton>
+        </MusicPlaceButtonContainer>
       </Controller>
     </CreateControllerContainer>
   );
@@ -44,6 +68,8 @@ const Controller = styled.div`
 `;
 
 const ControllerTitle = styled.p`
+  position: relative;
+  top: -1rem;
   color: #513d6c;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 1.5rem;
@@ -57,4 +83,62 @@ const ControllerSubtitle = styled.p`
   font-size: 1rem;
   font-weight: 300;
   text-transform: capitalize;
+`;
+
+const MusicSpeedInputContainer = styled.div`
+  display: flex;
+  width: 12rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const MusicMoodButtonContainer = styled.div`
+  display: flex;
+  width: 12rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const MusicMoodButton = styled.button`
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 1rem;
+  background: linear-gradient(
+    120deg,
+    #dbbeff -0.41%,
+    rgba(212, 210, 255, 0.98) 6.15%,
+    rgba(219, 200, 243, 0.76) 35.4%,
+    rgba(219, 200, 243, 0.76) 78.69%
+  );
+`;
+
+const MusicPlaceButtonContainer = styled.div`
+  display: flex;
+  width: 12rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const MusicPlaceButton = styled.button`
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  width: 4rem;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 1rem;
+  background: linear-gradient(
+    120deg,
+    #dbbeff -0.41%,
+    rgba(212, 210, 255, 0.98) 6.15%,
+    rgba(219, 200, 243, 0.76) 35.4%,
+    rgba(219, 200, 243, 0.76) 78.69%
+  );
 `;
