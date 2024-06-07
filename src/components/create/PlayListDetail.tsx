@@ -1,20 +1,12 @@
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MUSICS } from '../../api/musics';
+import { MUSICS } from '../../api/musicsConstants';
 import { useAudio } from '../../hooks/useAudio';
 import './PlayList.css';
 
 export const PlayListDetail = () => {
   const { currentMusicId, setCurrentMusicId, isPlaying, playMusic, stopMusic } =
     useAudio();
-
-  const togglePlay = () => {
-    if (currentMusicId === 0) {
-      setCurrentMusicId(1);
-    } else {
-      setCurrentMusicId(0);
-    }
-  };
 
   return (
     <PlayListDetailContainer>

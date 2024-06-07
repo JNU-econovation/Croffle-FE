@@ -1,44 +1,105 @@
 import styled from 'styled-components';
 import './Create.css';
+import { PromptProps, useGenerate } from '../../hooks/useGenerate';
+import { motion } from 'framer-motion';
 
 export const CreateController = () => {
+  const { promptState, setPromptState } = useGenerate();
+  const { speed, mood, place } = promptState;
+  const { setSpeed, setMood, setPlace } = setPromptState;
+  const { generateMusic } = useGenerate();
+
+  const handleSpeedInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    setSpeed(Number(value));
+  };
+  const handleMoodButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const value = e.currentTarget.value;
+    setMood(value);
+  };
+
+  const handlePlaceButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const value = e.currentTarget.value;
+    setPlace(value);
+  };
+
+  const handleGenerateMusic = async ({ speed, mood, place }: PromptProps) => {
+    generateMusic({ speed, mood, place });
+  };
+
   return (
     <CreateControllerContainer>
-      <Controller>
+      <motion.div className="Controller" whileHover={{ scale: 1.3 }}>
         <ControllerTitle>01</ControllerTitle>
         <ControllerSubtitle>스피드</ControllerSubtitle>
         <MusicSpeedInputContainer>
-          <input className="MusicSpeedInput" type="range" min="1" max="100" />
+          <input
+            className="MusicSpeedInput"
+            onChange={handleSpeedInput}
+            value={speed}
+            type="range"
+            min="1"
+            max="100"
+          />
+          <SpeedValueContainer>
+            <SpeedValue>Slow</SpeedValue>
+            <SpeedValue>Fast</SpeedValue>
+          </SpeedValueContainer>
         </MusicSpeedInputContainer>
-      </Controller>
-      <Controller>
+      </motion.div>
+      <motion.div className="Controller" whileHover={{ scale: 1.3 }}>
         <ControllerTitle>02</ControllerTitle>
         <ControllerSubtitle>분위기</ControllerSubtitle>
         <MusicMoodButtonContainer>
-          <MusicMoodButton>편안한</MusicMoodButton>
-          <MusicMoodButton>신나는</MusicMoodButton>
+          <MusicMoodButton value="편안한" onClick={handleMoodButton}>
+            편안한
+          </MusicMoodButton>
+          <MusicMoodButton value="신나는" onClick={handleMoodButton}>
+            신나는
+          </MusicMoodButton>
         </MusicMoodButtonContainer>
         <MusicMoodButtonContainer>
-          <MusicMoodButton>잔잔한</MusicMoodButton>
-          <MusicMoodButton>흥겨운</MusicMoodButton>
+          <MusicMoodButton value="잔잔한" onClick={handleMoodButton}>
+            잔잔한
+          </MusicMoodButton>
+          <MusicMoodButton value="흥겨운" onClick={handleMoodButton}>
+            흥겨운
+          </MusicMoodButton>
         </MusicMoodButtonContainer>
-      </Controller>
-      <Controller>
+      </motion.div>
+      <motion.div className="Controller" whileHover={{ scale: 1.3 }}>
         <ControllerTitle>03</ControllerTitle>
         <ControllerSubtitle>장소</ControllerSubtitle>
         <MusicPlaceButtonContainer>
-          <MusicPlaceButton>집</MusicPlaceButton>
-          <MusicPlaceButton>카페</MusicPlaceButton>
+          <MusicPlaceButton value="집" onClick={handlePlaceButton}>
+            집
+          </MusicPlaceButton>
+          <MusicPlaceButton value="카페" onClick={handlePlaceButton}>
+            카페
+          </MusicPlaceButton>
         </MusicPlaceButtonContainer>
         <MusicPlaceButtonContainer>
-          <MusicPlaceButton>산책</MusicPlaceButton>
-          <MusicPlaceButton>운동</MusicPlaceButton>
+          <MusicPlaceButton value="산책" onClick={handlePlaceButton}>
+            산책
+          </MusicPlaceButton>
+          <MusicPlaceButton value="운동" onClick={handlePlaceButton}>
+            운동
+          </MusicPlaceButton>
         </MusicPlaceButtonContainer>
         <MusicPlaceButtonContainer>
-          <MusicPlaceButton>산책</MusicPlaceButton>
-          <MusicPlaceButton>운동</MusicPlaceButton>
+          <MusicPlaceButton value="학교" onClick={handlePlaceButton}>
+            학교
+          </MusicPlaceButton>
+          <MusicPlaceButton value="산" onClick={handlePlaceButton}>
+            산
+          </MusicPlaceButton>
         </MusicPlaceButtonContainer>
-      </Controller>
+      </motion.div>
+      <GeneratePromptButton
+        onClick={() => handleGenerateMusic({ speed, mood, place })}
+      >
+        prompt 제출
+      </GeneratePromptButton>
     </CreateControllerContainer>
   );
 };
@@ -53,21 +114,7 @@ const CreateControllerContainer = styled.div`
   height: 100%;
 `;
 
-const Controller = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 12rem;
-  height: 16rem;
-  margin: 2rem;
-  border-radius: 0.875rem;
-  border: 1px solid #e2d2fe;
-  background: #fff;
-  box-shadow: -2px 5px 13px 2px rgba(0, 0, 0, 0.25);
-`;
-
-const ControllerTitle = styled.p`
+export const ControllerTitle = styled.p`
   position: relative;
   top: -1rem;
   color: #513d6c;
@@ -77,7 +124,7 @@ const ControllerTitle = styled.p`
   text-transform: capitalize;
 `;
 
-const ControllerSubtitle = styled.p`
+export const ControllerSubtitle = styled.p`
   color: #513d6c;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 1rem;
@@ -87,11 +134,27 @@ const ControllerSubtitle = styled.p`
 
 const MusicSpeedInputContainer = styled.div`
   display: flex;
-  width: 12rem;
+  width: 100%;
+  margin-top: 3rem;
   height: 4rem;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap: 1rem;
+`;
+
+const SpeedValueContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+`;
+
+const SpeedValue = styled.p`
+  color: #513d6c;
+  font-size: 0.875rem;
+  font-weight: 300;
+  margin: 0 3rem;
+  text-transform: capitalize;
 `;
 
 const MusicMoodButtonContainer = styled.div`
@@ -116,6 +179,12 @@ const MusicMoodButton = styled.button`
     rgba(219, 200, 243, 0.76) 35.4%,
     rgba(219, 200, 243, 0.76) 78.69%
   );
+  transition: 0.3s;
+  & :hover {
+    background: #ffffff;
+    color: #000000; 
+    );
+  }
 `;
 
 const MusicPlaceButtonContainer = styled.div`
@@ -131,6 +200,22 @@ const MusicPlaceButton = styled.button`
   padding: 0.4rem 1rem;
   font-size: 1rem;
   width: 4rem;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 1rem;
+  background: linear-gradient(
+    120deg,
+    #dbbeff -0.41%,
+    rgba(212, 210, 255, 0.98) 6.15%,
+    rgba(219, 200, 243, 0.76) 35.4%,
+    rgba(219, 200, 243, 0.76) 78.69%
+  );
+`;
+
+const GeneratePromptButton = styled.button`
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  display: block;
   font-weight: 500;
   color: #ffffff;
   border-radius: 1rem;

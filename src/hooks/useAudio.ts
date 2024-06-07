@@ -12,6 +12,8 @@ export const useAudio = () => {
     useState<MusicProps['musicId']>(0);
   const [isPlaying, setIsPlaying] = useState<MusicProps['isPlaying']>(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  //음악의 총 길이에서 얼마나 진행되었는지를 나타내는 변수
+  const [progress, setProgress] = useState(0);
 
   const playMusic = (music: MusicProps) => {
     if (audio) {
@@ -31,6 +33,13 @@ export const useAudio = () => {
     }
     setCurrentMusicId(0);
     setIsPlaying(false);
+  };
+
+  const updateProgress = () => {
+    //현재 재생중인 오디오의 사간만 가져옴
+    const audio = document.getElementById('audio') as HTMLAudioElement;
+    const progress = (audio.currentTime / audio.duration) * 100;
+    setProgress(progress);
   };
 
   return {

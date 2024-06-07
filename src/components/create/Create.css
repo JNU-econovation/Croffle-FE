@@ -1,9 +1,9 @@
 input[type='range'] {
   -webkit-appearance: none;
-  width: 100%;
+  width: 120;
   height: 10px;
-  background: transparent;
   outline: none;
+  border-radius: 8.1875rem;
 }
 
 input[type='range']::-webkit-slider-thumb {
@@ -11,12 +11,35 @@ input[type='range']::-webkit-slider-thumb {
   appearance: none;
   width: 20px;
   height: 20px;
-  background: url('../../assets/toggleButton.svg') no-repeat;
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, #946ec4 0%, #513d6c 100%);
   cursor: pointer;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
-  height: 10px;
-  background: url('../../assets/toggle.svg') no-repeat;
+  height: 20px;
+  border-radius: 8.1875rem;
+  background: #d9d9d9;
+  box-shadow:
+    4px 4px 10px 0px rgba(0, 0, 0, 0.35) inset,
+    -15px -15px 30px 0px #fff inset;
+}
+
+.MusicSpeedInput {
+  width: 90%;
+}
+
+.Controller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  height: 16rem;
+  margin: 2rem;
+  border-radius: 0.875rem;
+  border: 1px solid #e2d2fe;
+  background: #fff;
+  box-shadow: -2px 5px 13px 2px rgba(0, 0, 0, 0.25);
 }
