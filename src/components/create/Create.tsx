@@ -2,8 +2,11 @@ import { PageLayout } from '../common/Layout';
 import { CreateForm } from './CreateForm';
 import styled from 'styled-components';
 import { PlayList } from './PlayList';
+import { useGenerate } from '../../hooks/useGenerate';
 
 export const Create = () => {
+  const { stepState } = useGenerate();
+
   return (
     <PageLayout>
       <CreateBackground>

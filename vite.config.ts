@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
-    port: 8080,
+    port: 3000,
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
   },
 });

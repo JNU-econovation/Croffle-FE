@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { PageLayout } from '../common/Layout';
 import bgImg from '../../assets/bgImg.png';
 import { ProcessButton } from './ProcessButton';
+import { GoogleLoginButton } from './GoogleLoginButton';
 
 export const Home = () => {
   return (
@@ -11,6 +12,7 @@ export const Home = () => {
           <HomeTitle>Croffle</HomeTitle>
           <HomeSubtitle>하나뿐인 작업곡을 만들어보세요</HomeSubtitle>
           <ProcessButton />
+          {localStorage.getItem('accessToken') ? null : <GoogleLoginButton />}
         </HomeContainer>
       </HomeBackground>
     </PageLayout>

@@ -36,7 +36,6 @@ export const useAudio = () => {
   };
 
   const updateProgress = () => {
-    //현재 재생중인 오디오의 사간만 가져옴
     const audio = document.getElementById('audio') as HTMLAudioElement;
     const progress = (audio.currentTime / audio.duration) * 100;
     setProgress(progress);
@@ -48,5 +47,7 @@ export const useAudio = () => {
     isPlaying,
     playMusic,
     stopMusic,
+    progress,
+    updateProgress,
   };
 };

@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import './Create.css';
 import { PromptProps, useGenerate } from '../../hooks/useGenerate';
 import { motion } from 'framer-motion';
+import playIcon2 from '../../assets/playIcon2.svg';
 
 export const CreateController = () => {
   const { promptState, setPromptState } = useGenerate();
   const { speed, mood, place } = promptState;
   const { setSpeed, setMood, setPlace } = setPromptState;
   const { generateMusic } = useGenerate();
+  const { generateMemberMusic } = useGenerate();
 
   const handleSpeedInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
@@ -23,8 +25,17 @@ export const CreateController = () => {
     setPlace(value);
   };
 
-  const handleGenerateMusic = async ({ speed, mood, place }: PromptProps) => {
-    generateMusic({ speed, mood, place });
+  const handleGenerateMusic = async ({
+    speed,
+    mood,
+    place,
+    strPrompt,
+  }: PromptProps) => {
+    if (localStorage.getItem('accessToken')) {
+      generateMemberMusic({ speed, mood, place, strPrompt });
+    } else {
+      generateMusic({ speed, mood, place, strPrompt });
+    }
   };
 
   return (
@@ -95,8 +106,13 @@ export const CreateController = () => {
           </MusicPlaceButton>
         </MusicPlaceButtonContainer>
       </motion.div>
+      <GeneratePrompt1Button>
+        <img src={playIcon2} alt="play icon" />
+      </GeneratePrompt1Button>
       <GeneratePromptButton
-        onClick={() => handleGenerateMusic({ speed, mood, place })}
+        onClick={() =>
+          handleGenerateMusic({ speed, mood, place, strPrompt: '' })
+        }
       >
         prompt 제출
       </GeneratePromptButton>
@@ -213,6 +229,22 @@ const MusicPlaceButton = styled.button`
 `;
 
 const GeneratePromptButton = styled.button`
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  display: block;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 1rem;
+  background: linear-gradient(
+    120deg,
+    #dbbeff -0.41%,
+    rgba(212, 210, 255, 0.98) 6.15%,
+    rgba(219, 200, 243, 0.76) 35.4%,
+    rgba(219, 200, 243, 0.76) 78.69%
+  );
+`;
+
+const GeneratePrompt1Button = styled.button`
   padding: 0.4rem 1rem;
   font-size: 1rem;
   display: block;
