@@ -12,6 +12,7 @@ export const useAudio = () => {
     useState<MusicProps['musicId']>(0);
   const [isPlaying, setIsPlaying] = useState<MusicProps['isPlaying']>(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [progress, setProgress] = useState(0);
 
   const playMusic = (music: MusicProps) => {
     if (audio) {
@@ -33,11 +34,19 @@ export const useAudio = () => {
     setIsPlaying(false);
   };
 
+  const updateProgress = () => {
+    const audio = document.getElementById('audio') as HTMLAudioElement;
+    const progress = (audio.currentTime / audio.duration) * 100;
+    setProgress(progress);
+  };
+
   return {
     currentMusicId,
     setCurrentMusicId,
     isPlaying,
     playMusic,
     stopMusic,
+    progress,
+    updateProgress,
   };
 };

@@ -1,22 +1,13 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useMember } from '../../hooks/useMember';
 
-export const ProcessButton = ({ isMember }) => {
-  const navigate = useNavigate();
-  const onClickProcess = () => {
-    if (isMember) {
-      navigate('/createMember');
-    } else if (!isMember) {
-      navigate('/createGuest');
-    }
-  };
+export const GoogleLoginButton = () => {
+  const { handleGoogleLogin } = useMember();
 
   return (
-    <ProcessButtonContainer>
-      <PlayImg src="../../../src/assets/startImg.png" alt="play" />
-      <ProcessButtonContent onClick={onClickProcess}>
-        Get Started
-      </ProcessButtonContent>
+    <ProcessButtonContainer onClick={handleGoogleLogin}>
+      <SocialImg src="../../../src/assets/google.png" alt="Google Logo" />
+      <ProcessButtonContent>Login With Google</ProcessButtonContent>
     </ProcessButtonContainer>
   );
 };
@@ -36,13 +27,13 @@ const ProcessButtonContainer = styled.button`
 `;
 
 const ProcessButtonContent = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #5d5d5d;
   font-style: normal;
   font-weight: 500;
 `;
 
-const PlayImg = styled.img`
+const SocialImg = styled.img`
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
