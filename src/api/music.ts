@@ -7,15 +7,34 @@ export interface Music {
   like: number;
 }
 
-interface GetPlayListRes {
-  music: Music[];
+export interface GetPlayListRes {
+  musicId: number;
+  musicUrl: string;
+  title: string;
+  like: number;
+  pressed: boolean;
 }
-interface GetMyPlayListRes {
+export interface GetMyPlayListRes {
   name: string;
-  music: Music[];
+  musicId: number;
+  musicUrl: string;
+  title: string;
+  like: number;
 }
 
-export const getPlayList = async (): Promise<GetPlayListRes> => {
+export interface PostMusicLikeReq {
+  musicId: number;
+}
+export interface PostMusicLikeRes {
+  success: false;
+  response: null;
+  error: {
+    message: string;
+    statusCode: number;
+  };
+}
+
+export const getPlayList = async (): Promise<Music> => {
   const response = await https.get('/playlist');
   return response.data.response.music;
 };
@@ -26,8 +45,19 @@ export const getMyPlayList = async (): Promise<GetMyPlayListRes> => {
 };
 
 export const getPopularPlayList = async (): Promise<GetPlayListRes> => {
-  const response = await https.get('/popular-playlist');
+  const token = localStorage.getItem('accessToken'); // 예시로 localStorage에서 토큰을 가져오는 경우
+  const request = token ? authorizationRequest : https;
+  const response = await request.get('/popular-playlist');
   return response.data.response.music;
+};
+
+export const postMusicLike = async ({
+  musicId,
+}: PostMusicLikeReq): Promise<PostMusicLikeRes> => {
+  const response = await authorizationRequest.post(`/music/${musicId}/like`, {
+    musicId,
+  });
+  return response.data;
 };
 
 export interface PostGenerateMusicReq {

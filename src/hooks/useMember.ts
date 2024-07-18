@@ -46,5 +46,6 @@ export const useMember = () => {
 
   return {
     handleGoogleLogin,
+    getGoogleLogin,
   };
 };

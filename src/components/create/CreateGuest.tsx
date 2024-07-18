@@ -1,17 +1,14 @@
+import { PlayListDetailGuest } from './PlayListDetailGuest';
 import { PageLayout } from '../common/Layout';
 import { CreateForm } from './CreateForm';
 import styled from 'styled-components';
-import { PlayList } from './PlayList';
-import { useGenerate } from '../../hooks/useGenerate';
 
-export const Create = () => {
-  const { stepState } = useGenerate();
-
+export const CreateGuest = () => {
   return (
     <PageLayout>
       <CreateBackground>
         <CreateForm />
-        <PlayList />
+        <PlayListDetailGuest />
       </CreateBackground>
     </PageLayout>
   );

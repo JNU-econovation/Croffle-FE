@@ -12,7 +12,6 @@ export const useAudio = () => {
     useState<MusicProps['musicId']>(0);
   const [isPlaying, setIsPlaying] = useState<MusicProps['isPlaying']>(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  //음악의 총 길이에서 얼마나 진행되었는지를 나타내는 변수
   const [progress, setProgress] = useState(0);
 
   const playMusic = (music: MusicProps) => {

@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../hooks/useAudio';
 import { getPlayList, Music } from '../../api/music';
 import musicImg from '../../../src/assets/musicImg.svg';
-import LikeBefore from '../../assets/LikeBefore.svg';
-// import LikeAfter from '../../../src/assets/likeAfter.svg';
 
 export const PlayListDetailGuest = () => {
   const {
@@ -49,10 +47,6 @@ export const PlayListDetailGuest = () => {
             >
               <MusicImg src={musicImg} />
               <MusicTitle>{music.title}</MusicTitle>
-              <div>
-                <img src={LikeBefore} alt="Like button" />
-                {music.like} 개
-              </div>
               <MusicPlayButton>
                 <button
                   onClick={

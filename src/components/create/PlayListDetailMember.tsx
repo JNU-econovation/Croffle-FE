@@ -3,12 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../hooks/useAudio';
 import './PlayList.css';
 import { useEffect, useState } from 'react';
-import { getPlayList, Music } from '../../api/music';
 import musicImg from '../../../src/assets/musicImg.svg';
-import { getMyPlayList } from '../../api/music';
-import { Token } from '../../api/member';
-// import LikeBefore from '../../../src/assets/likeBefore.svg';
-// import LikeAfter from '../../../src/assets/likeAfter.svg';
+import { getMyPlayList, Music } from '../../api/music';
 
 export const PlayListDetailMember = () => {
   const {
@@ -20,12 +16,9 @@ export const PlayListDetailMember = () => {
     updateProgress,
   } = useAudio();
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
-  const token: Token = {
-    accessToken: localStorage.getItem('accessToken') ?? '',
-  };
   const fetchPlayList = async () => {
     try {
-      const playList = await getMyPlayList(token);
+      const playList = await getMyPlayList();
       setFetchedMusicList(playList);
     } catch (error) {
       console.error('Failed to fetch playlist', error);
@@ -65,7 +58,6 @@ export const PlayListDetailMember = () => {
                     src="../../../src/assets/playButton.svg"
                     alt="Play button"
                   />
-                  <div>좋아요: {music.like}</div>
                 </button>
                 <DonutContainer>
                   <svg width="50" height="50" viewBox="0 0 50 50">

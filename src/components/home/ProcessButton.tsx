@@ -1,11 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const ProcessButton = () => {
+export const ProcessButton = ({ isMember }) => {
   const navigate = useNavigate();
   const onClickProcess = () => {
-    navigate('create');
+    if (isMember) {
+      navigate('/createMember');
+    } else if (!isMember) {
+      navigate('/createGuest');
+    }
   };
+
   return (
     <ProcessButtonContainer>
       <PlayImg src="../../../src/assets/startImg.png" alt="play" />
