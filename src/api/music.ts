@@ -1,4 +1,9 @@
-import { https, authorizationRequest } from './https';
+import {
+  https,
+  authorizationRequest,
+  imageRequest,
+  imageMemberRequest,
+} from './https';
 
 export interface Music {
   musicId: number;
@@ -12,7 +17,7 @@ export interface GetPlayListRes {
   musicUrl: string;
   title: string;
   like: number;
-  pressed: boolean;
+  pressed?: boolean;
 }
 export interface GetMyPlayListRes {
   name: string;
@@ -26,15 +31,20 @@ export interface PostMusicLikeReq {
   musicId: number;
 }
 export interface PostMusicLikeRes {
-  success: false;
-  response: null;
-  error: {
-    message: string;
-    statusCode: number;
-  };
+  message: string;
+  statusCode: number;
 }
 
-export const getPlayList = async (): Promise<Music> => {
+export interface PostFormDataReq {
+  formData: FormData;
+}
+
+export interface PostFormDataRes {
+  message: string;
+  statusCode: number;
+}
+
+export const getPlayList = async (): Promise<GetPlayListRes> => {
   const response = await https.get('/playlist');
   return response.data.response.music;
 };
@@ -85,5 +95,14 @@ export const postMemberGenerateMusic = async ({
     prompt1,
     prompt2,
   });
+  return response.data;
+};
+
+export const postFormData = async ({
+  formData,
+}: PostFormDataReq): Promise<PostFormDataRes> => {
+  const token = localStorage.getItem('accessToken');
+  const request = token ? imageMemberRequest : imageRequest;
+  const response = await request.post('/generate-music/image', formData);
   return response.data;
 };

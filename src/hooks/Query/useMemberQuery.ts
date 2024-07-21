@@ -1,7 +1,7 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useMemberQuery = () => {
-  const queryQueryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const checkAccessToken = async () => {
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) return false;
@@ -18,11 +18,11 @@ export const useMemberQuery = () => {
 
   const logOut = () => {
     removeAccessToken();
-    queryQueryClient.invalidateQueries('isMember');
+    queryClient.invalidateQueries({ queryKey: ['isMember'] });
   };
 
   const { data } = useQuery({
-    queryKey: 'isMember',
+    queryKey: ['isMember'],
     queryFn: checkIsMember,
   });
 

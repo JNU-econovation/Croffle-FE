@@ -6,12 +6,16 @@ import LikeBefore from '../../../src/assets/LikeBefore.svg';
 import LikeAfter from '../../../src/assets/LikeAfter.svg';
 import { postMusicLike } from '../../api/music';
 import { usePlayListQuery } from '../../hooks/Query/usePlayListQuery';
+import { useNavigate } from 'react-router-dom';
 import './PlayList.css';
 
 export const CreateEnd = () => {
-  const { currentMusicId, isPlaying, playMusic, stopMusic, progress } =
-    useAudio();
+  const { currentMusicId, playMusic, stopMusic } = useAudio();
   const { popularPlayList, playList } = usePlayListQuery();
+  const navigate = useNavigate();
+  const handleHome = () => {
+    navigate('/');
+  };
 
   const handleMusicLike = async (musicId: number) => {
     try {
@@ -25,7 +29,7 @@ export const CreateEnd = () => {
   return (
     <PageLayout>
       <CreateBackground>
-        <CreateFormHeader>
+        <CreateFormHeader onClick={handleHome}>
           <p>Croffle</p>
         </CreateFormHeader>
         <PlayListContainer>
@@ -116,6 +120,7 @@ const CreateFormHeader = styled.div`
     letter-spacing: 0.125rem;
     text-transform: capitalize;
   }
+  cursor: pointer;
 `;
 
 const CreateBackground = styled.div`
@@ -199,22 +204,6 @@ const MusicPlayButton = styled.div`
     width: 3rem;
     height: 3rem;
   }
-`;
-
-const DonutContainer = styled.div`
-  top: 0;
-  left: 0;
-  width: 5rem;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ProgressText = styled.div`
-  position: absolute;
-  font-size: 0.875rem;
-  color: #7b42f6;
 `;
 
 const PopularPlayList = styled.div`
