@@ -1,9 +1,9 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getMyPlayList, GetMyPlayListRes } from '../../api/music';
 
 export const useMyPlayListQuery = () => {
   const { data: myPlayList } = useQuery<GetMyPlayListRes>({
-    queryKey: 'myPlayList',
+    queryKey: ['myPlayList'],
     queryFn: getMyPlayList,
   });
 

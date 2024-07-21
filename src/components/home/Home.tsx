@@ -14,7 +14,7 @@ export const Home = () => {
         <HomeContainer>
           <HomeTitle>Croffle</HomeTitle>
           <HomeSubtitle>하나뿐인 작업곡을 만들어보세요</HomeSubtitle>
-          <ProcessButton isMember={isMember} />
+          <ProcessButton isMember={isMember || false} />
           {!isMember && <GoogleLoginButton />}
         </HomeContainer>
       </HomeBackground>

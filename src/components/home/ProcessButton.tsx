@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const ProcessButton = ({ isMember }) => {
+interface ProcessButtonProps {
+  isMember: boolean;
+}
+
+export const ProcessButton = ({ isMember }: ProcessButtonProps) => {
   const navigate = useNavigate();
   const onClickProcess = () => {
     if (isMember) {

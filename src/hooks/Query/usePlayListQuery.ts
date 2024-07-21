@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import {
   GetPlayListRes,
   getPlayList,
@@ -7,12 +7,12 @@ import {
 
 export const usePlayListQuery = () => {
   const { data: playList } = useQuery<GetPlayListRes>({
-    queryKey: 'playList',
+    queryKey: ['playList'],
     queryFn: getPlayList,
   });
 
   const { data: popularPlayList } = useQuery<GetPlayListRes>({
-    queryKey: 'popularPlayList',
+    queryKey: ['popularPlayList'],
     queryFn: getPopularPlayList,
   });
 

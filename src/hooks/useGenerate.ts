@@ -29,7 +29,7 @@ export const useGenerate = () => {
 
   const fetchPlayList = async () => {
     const response = await getPlayList();
-    setMusics(response.music);
+    setMusics(response as unknown as Music[]);
   };
 
   const generateMusic = async ({

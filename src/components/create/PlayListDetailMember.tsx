@@ -19,7 +19,7 @@ export const PlayListDetailMember = () => {
   const fetchPlayList = async () => {
     try {
       const playList = await getMyPlayList();
-      setFetchedMusicList(playList);
+      setFetchedMusicList(playList as unknown as Music[]);
     } catch (error) {
       console.error('Failed to fetch playlist', error);
     }
