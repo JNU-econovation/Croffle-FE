@@ -27,7 +27,7 @@ export const PlayListDetailGuest = () => {
       const intervalId = setInterval(updateProgress, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [isPlaying, fetchedMusicList]);
+  }, [isPlaying]);
 
   return (
     <PlayListDetailContainer>
