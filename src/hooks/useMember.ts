@@ -4,7 +4,8 @@ import { BASE_URL, memberRequest } from '../api/https';
 
 export const useMember = () => {
   const navigate = useNavigate();
-  const FRONT_URL = 'http://localhost:3000';
+  // const FRONT_URL = 'http://localhost:3000';
+  const FRONT_URL = 'https://croffle-front.vercel.app';
   const CLIENT_ID =
     '343811570389-v2c7b274ap2drc630gut75l80ivm889t.apps.googleusercontent.com';
   const REQUEST_URI = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${FRONT_URL}&response_type=code&scope=profile`;
