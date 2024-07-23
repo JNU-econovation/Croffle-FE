@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useMember } from '../../hooks/useMember';
-import google from '@img/assets/google.png';
-
+import google from '@img/google.png';
 
 export const GoogleLoginButton = () => {
   const { handleGoogleLogin } = useMember();

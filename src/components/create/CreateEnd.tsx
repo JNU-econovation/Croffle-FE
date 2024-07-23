@@ -5,12 +5,10 @@ import musicImg from '@img/musicImg.svg';
 import LikeBefore from '@img/LikeBefore.svg';
 import LikeAfter from '@img/LikeAfter.svg';
 import PlayButton from '@img/playButton.svg';
-
 import { postMusicLike } from '../../api/music';
 import { usePlayListQuery } from '../../hooks/Query/usePlayListQuery';
 import { useNavigate } from 'react-router-dom';
 import './PlayList.css';
-import PlayButton from '@img/playButton.svg';
 
 export const CreateEnd = () => {
   const { currentMusicId, playMusic, stopMusic } = useAudio();

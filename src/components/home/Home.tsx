@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { PageLayout } from '../common/Layout';
-import bgImg from '@img/assets/bgImg.jpg';
+import bgImg from '@img/bgImg.png';
 import { ProcessButton } from './ProcessButton';
 import { GoogleLoginButton } from './GoogleLoginButton';
 import { useMemberQuery } from '../../hooks/Query/useMemberQuery';
