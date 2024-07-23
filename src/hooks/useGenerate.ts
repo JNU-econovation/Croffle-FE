@@ -39,7 +39,7 @@ export const useGenerate = () => {
     strPrompt,
   }: PromptProps) => {
     const prompt: PostGenerateMusicReq = {
-      prompt1: `속도가 ${speed}%로 빠른 분위기가 ${mood}인 장소가 ${place}인 음악`,
+      prompt1: `속도가 ${speed}%로 분위기가 ${mood} 장소가 ${place}인 음악`,
       prompt2: `${strPrompt}`,
     };
     if (speed === 0 || mood === '' || place === '')

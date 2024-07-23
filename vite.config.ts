@@ -9,5 +9,6 @@ export default defineConfig({
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    alias: [{ find: '@img', replacement: '/src/assets/' }],
   },
 });
