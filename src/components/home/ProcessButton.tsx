@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import StartImg from '@img/startImg.png';
+import startImg from '@img/asstes/startImg.png';
+
 
 interface ProcessButtonProps {
   isMember: boolean;

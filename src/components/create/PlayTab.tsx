@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import record from '@img/record.svg';
-import playIcon from '@img/playIcon.svg';
+import record from '@img/assets/record.svg';
+import playIcon from '@img/assets/playIcon.svg';
+
 
 export const PlayTab = () => {
   return (
