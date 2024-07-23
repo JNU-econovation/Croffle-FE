@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { PageLayout } from '../common/Layout';
 import { useAudio } from '../../hooks/useAudio';
-import musicImg from '../../../src/assets/musicImg.svg';
-import LikeBefore from '../../../src/assets/LikeBefore.svg';
-import LikeAfter from '../../../src/assets/LikeAfter.svg';
+import musicImg from '@img/musicImg.svg';
+import LikeBefore from '@img/LikeBefore.svg';
+import LikeAfter from '@img/LikeAfter.svg';
+import PlayButton from '@img/playButton.svg';
 import { postMusicLike } from '../../api/music';
 import { usePlayListQuery } from '../../hooks/Query/usePlayListQuery';
 import { useNavigate } from 'react-router-dom';
@@ -58,10 +59,7 @@ export const CreateEnd = () => {
                             : () => playMusic(music)
                         }
                       >
-                        <img
-                          src="../../../src/assets/playButton.svg"
-                          alt="Play button"
-                        />
+                        <img src={PlayButton} alt="Play button" />
                       </button>
                     </MusicPlayButton>
                   </div>
@@ -93,10 +91,7 @@ export const CreateEnd = () => {
                             : () => playMusic(music)
                         }
                       >
-                        <img
-                          src="../../../src/assets/playButton.svg"
-                          alt="Play button"
-                        />
+                        <img src={PlayButton} alt="Play button" />
                       </button>
                     </MusicPlayButton>
                   </div>

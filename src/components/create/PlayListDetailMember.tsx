@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../hooks/useAudio';
 import './PlayList.css';
 import { useEffect, useState } from 'react';
-import musicImg from '../../../src/assets/musicImg.svg';
+import musicImg from '@img/musicImg.svg';
 import { getMyPlayList, Music } from '../../api/music';
+import PlayButton from '@img/playButton.svg';
 
 export const PlayListDetailMember = () => {
   const {
@@ -54,10 +55,7 @@ export const PlayListDetailMember = () => {
                       : () => playMusic(music)
                   }
                 >
-                  <img
-                    src="../../../src/assets/playButton.svg"
-                    alt="Play button"
-                  />
+                  <img src={PlayButton} alt="Play button" />
                 </button>
                 <DonutContainer>
                   <svg width="50" height="50" viewBox="0 0 50 50">
