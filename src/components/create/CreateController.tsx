@@ -134,7 +134,7 @@ export const CreateController = () => {
           </PromptInputContainer>
           <GeneratePromptButton
             onClick={() =>
-              handleGenerateMusic({ speed, mood, place, strPrompt: '' })
+              handleGenerateMusic({ speed, mood, place, strPrompt })
             }
           >
             prompt 제출
