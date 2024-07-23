@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import StartImg from '@img/startImg.png';
 
 interface ProcessButtonProps {
   isMember: boolean;
@@ -17,7 +18,7 @@ export const ProcessButton = ({ isMember }: ProcessButtonProps) => {
 
   return (
     <ProcessButtonContainer>
-      <PlayImg src="../../../src/assets/startImg.png" alt="play" />
+      <PlayImg src={StartImg} alt="play" />
       <ProcessButtonContent onClick={onClickProcess}>
         Get Started
       </ProcessButtonContent>

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import record from '@img/record.svg';
+import playIcon from '@img/playIcon.svg';
 
 export const PlayTab = () => {
   return (
     <PlayTabContainer>
-      <TabImg src="../../../src/assets/record.svg" alt="tab-img" />
+      <TabImg src={record} alt="tab-img" />
       <PlayBgmButton>
-        <PlayIcon src="../../../src/assets/playIcon.svg" />
+        <PlayIcon src={playIcon} alt="playIcon" />
       </PlayBgmButton>
     </PlayTabContainer>
   );

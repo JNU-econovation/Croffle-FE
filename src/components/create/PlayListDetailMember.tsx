@@ -3,18 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../hooks/useAudio';
 import './PlayList.css';
 import { useEffect, useState } from 'react';
-import musicImg from '../../../src/assets/musicImg.svg';
+import musicImg from '@img/musicImg.svg';
 import { getMyPlayList, Music } from '../../api/music';
+import PlayButton from '@img/playButton.svg';
 
 export const PlayListDetailMember = () => {
-  const {
-    currentMusicId,
-    isPlaying,
-    playMusic,
-    stopMusic,
-    progress,
-    updateProgress,
-  } = useAudio();
+  const { currentMusicId, isPlaying, playMusic, stopMusic, updateProgress } =
+    useAudio();
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
   const fetchPlayList = async () => {
     try {
@@ -31,7 +26,7 @@ export const PlayListDetailMember = () => {
       const intervalId = setInterval(updateProgress, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [progress, isPlaying]);
+  }, [isPlaying]);
 
   return (
     <PlayListDetailContainer>
@@ -54,36 +49,8 @@ export const PlayListDetailMember = () => {
                       : () => playMusic(music)
                   }
                 >
-                  <img
-                    src="../../../src/assets/playButton.svg"
-                    alt="Play button"
-                  />
+                  <img src={PlayButton} alt="Play button" />
                 </button>
-                <DonutContainer>
-                  <svg width="50" height="50" viewBox="0 0 50 50">
-                    <circle
-                      cx="25"
-                      cy="25"
-                      r="20"
-                      fill="none"
-                      stroke="#e6e6e6"
-                      strokeWidth="5"
-                    />
-                    <circle
-                      cx="25"
-                      cy="25"
-                      r="20"
-                      fill="none"
-                      stroke="#7b42f6"
-                      strokeWidth="5"
-                      strokeDasharray="125.6"
-                      strokeDashoffset={125.6 - (progress / 100) * 125.6}
-                      strokeLinecap="round"
-                      style={{ transition: 'stroke-dashoffset 0.3s' }}
-                    />
-                  </svg>
-                  <ProgressText>{progress.toFixed(2)}%</ProgressText>
-                </DonutContainer>
               </MusicPlayButton>
             </motion.div>
           ))}
@@ -118,7 +85,7 @@ const MusicImg = styled.img`
 `;
 
 const MusicTitle = styled.div`
-  width: 10rem;
+  width: 14rem;
   height: 5rem;
   margin: 0.75rem 0 0 1.5rem;
   font-size: 1.2rem;
@@ -136,20 +103,4 @@ const MusicPlayButton = styled.div`
     width: 3rem;
     height: 3rem;
   }
-`;
-
-const DonutContainer = styled.div`
-  top: 0;
-  left: 0;
-  width: 5rem;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ProgressText = styled.div`
-  position: absolute;
-  font-size: 0.875rem;
-  color: #7b42f6;
 `;
