@@ -3,6 +3,7 @@ import './Create.css';
 import { PromptProps, useGenerate } from '../../hooks/useGenerate';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateController = () => {
   const [promptStep, setPromptStep] = useState<number>(1);
@@ -11,7 +12,7 @@ export const CreateController = () => {
   const { setSpeed, setMood, setPlace, setStrPrompt } = setPromptState;
   const { generateMusic } = useGenerate();
   const { generateMemberMusic } = useGenerate();
-
+  const navigate = useNavigate();
   const handleSpeedInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     setSpeed(Number(value));
@@ -46,6 +47,7 @@ export const CreateController = () => {
     } else {
       generateMusic({ speed, mood, place, strPrompt });
     }
+    navigate('/createEnd');
   };
 
   return (
