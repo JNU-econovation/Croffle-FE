@@ -4,6 +4,7 @@ import { PromptProps, useGenerate } from '../../hooks/useGenerate';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import playIcon2 from '@img/playIcon2.svg';
 
 export const CreateController = () => {
   const [promptStep, setPromptStep] = useState<number>(1);
@@ -120,7 +121,9 @@ export const CreateController = () => {
               </MusicPlaceButton>
             </MusicPlaceButtonContainer>
           </motion.div>
-          <ChangeStepButton onClick={handlePromptStep}>다음</ChangeStepButton>
+          <ChangeStepButton onClick={handlePromptStep}>
+            <img src={playIcon2} />
+          </ChangeStepButton>
         </CreateControllerContainer>
       )}
       {promptStep === 2 && (
@@ -149,7 +152,7 @@ export const CreateController = () => {
 
 const CreateControllerContainer = styled.div`
   display: flex;
-  margin-left: 8rem;
+  margin-left: 3rem;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -249,19 +252,12 @@ const MusicPlaceButton = styled.button`
   );
 `;
 
-const ChangeStepButton = styled.button`
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #ffffff;
-  border-radius: 1rem;
-  background: linear-gradient(
-    120deg,
-    #dbbeff -0.41%,
-    rgba(212, 210, 255, 0.98) 6.15%,
-    rgba(219, 200, 243, 0.76) 35.4%,
-    rgba(219, 200, 243, 0.76) 78.69%
-  );
+const ChangeStepButton = styled.div`
+  margin-left: 2rem;
+  img {
+    width: 3rem;
+  }
+  cursor: pointer;
 `;
 
 const GeneratePromptButton = styled.button`
