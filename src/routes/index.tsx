@@ -3,7 +3,7 @@ import App from '../App';
 import { HomePage } from '../pages/home/Home.page';
 import { CreateMemberPage } from '../pages/CreateMember.page.jsx';
 import { CreateGuestPage } from '../pages/CreateGuest.page.jsx';
-import { LoadingPage } from '../pages/Loading.page.jsx';
+import { CreateLikePage } from '../pages/CreateLike.page.jsx';
 import { CreateEndPage } from '../pages/CreateEnd.page.jsx';
 
 const routes = createBrowserRouter([
@@ -28,12 +28,12 @@ const routes = createBrowserRouter([
         element: <CreateGuestPage />,
       },
       {
-        path: '/loading',
-        element: <LoadingPage />,
-      },
-      {
         path: '/createEnd',
         element: <CreateEndPage />,
+      },
+      {
+        path: '/createLike',
+        element: <CreateLikePage />,
       },
     ],
   },
