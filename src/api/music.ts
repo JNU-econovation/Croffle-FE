@@ -75,8 +75,12 @@ export interface PostGenerateMusicReq {
   prompt2: string;
 }
 
-interface PostGenerateMusicRes {
-  musicUrl: string;
+export interface PostGenerateMusicRes {
+  success: boolean;
+  response: {
+    musicUrl: string;
+  };
+  error: null;
 }
 
 export const postGenerateMusic = async ({

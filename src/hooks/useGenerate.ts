@@ -42,10 +42,17 @@ export const useGenerate = () => {
       prompt1: `속도가 ${speed}%로 분위기가 ${mood} 장소가 ${place}인 음악`,
       prompt2: `${strPrompt}`,
     };
+
     if (speed === 0 || mood === '' || place === '')
       return alert('모든 항목을 입력해주세요');
-    await postGenerateMusic(prompt);
+    const response = await postGenerateMusic(prompt);
+    const musicUrl = response.response.musicUrl;
+    localStorage.setItem('currentMusicUrl', musicUrl);
     fetchPlayList();
+  };
+
+  const setMusicUrlLocalStorage = (musicUrl: string) => {
+    localStorage.setItem('currentMusicUrl', musicUrl);
   };
 
   const generateMemberMusic = async ({
@@ -60,7 +67,9 @@ export const useGenerate = () => {
     };
     if (speed === 0 || mood === '' || place === '')
       return alert('모든 항목을 입력해주세요');
-    await postMemberGenerateMusic(prompt);
+    const response = await postMemberGenerateMusic(prompt);
+    const musicUrl = response.response.musicUrl;
+    setMusicUrlLocalStorage(musicUrl);
     fetchPlayList();
   };
 

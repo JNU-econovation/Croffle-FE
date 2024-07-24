@@ -1,12 +1,29 @@
 import styled from 'styled-components';
 import record from '@img/record.svg';
 import playIcon from '@img/playIcon.svg';
+import { useState } from 'react';
 
-export const PlayTab = () => {
+interface PlayTabProps {
+  musicUrl: string;
+}
+
+export const PlayTab = ({ musicUrl }: PlayTabProps) => {
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  const playBgm = () => {
+    if (audio) {
+      audio.pause();
+    }
+    const newAudio = new Audio(musicUrl);
+    newAudio.play();
+    setAudio(newAudio);
+    console.log(musicUrl);
+  };
+
   return (
     <PlayTabContainer>
       <TabImg src={record} alt="tab-img" />
-      <PlayBgmButton>
+      <PlayBgmButton onClick={() => playBgm()}>
         <PlayIcon src={playIcon} alt="playIcon" />
       </PlayBgmButton>
     </PlayTabContainer>
