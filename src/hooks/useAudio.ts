@@ -34,10 +34,11 @@ export const useAudio = () => {
     setIsPlaying(false);
   };
 
-  const updateProgress = () => {
-    const audio = document.getElementById('audio') as HTMLAudioElement;
-    const progress = (audio.currentTime / audio.duration) * 100;
-    setProgress(progress);
+  const getCurrentMusicProgress = () => {
+    if (audio) {
+      const currentProgress = (audio.currentTime / audio.duration) * 100;
+      setProgress(currentProgress);
+    }
   };
 
   return {
@@ -47,6 +48,7 @@ export const useAudio = () => {
     playMusic,
     stopMusic,
     progress,
-    updateProgress,
+    setProgress,
+    getCurrentMusicProgress,
   };
 };
