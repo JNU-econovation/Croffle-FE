@@ -2,8 +2,10 @@ import { useGenerateQuery } from '../../hooks/Query/useGenerateQuery';
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import imageUpload from '../../assets/imageUpload.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateImage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(new FormData());
   const { handleImageUpload } = useGenerateQuery();
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +20,7 @@ export const CreateImage = () => {
     }
     formData.append('image', image);
     setFormData(formData);
+    navigate('/createEnd');
   };
 
   const addImage = () => {
