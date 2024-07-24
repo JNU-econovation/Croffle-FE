@@ -7,8 +7,7 @@ import musicImg from '@img/musicImg.svg';
 import PlayButton from '@img/playButton.svg';
 
 export const PlayListDetailGuest = () => {
-  const { currentMusicId, isPlaying, playMusic, stopMusic, updateProgress } =
-    useAudio();
+  const { currentMusicId, playMusic, stopMusic } = useAudio();
 
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
 
@@ -23,11 +22,7 @@ export const PlayListDetailGuest = () => {
 
   useEffect(() => {
     fetchPlayList();
-    if (isPlaying) {
-      const intervalId = setInterval(updateProgress, 1000);
-      return () => clearInterval(intervalId);
-    }
-  }, [isPlaying]);
+  }, [fetchedMusicList]);
 
   return (
     <PlayListDetailContainer>
