@@ -53,7 +53,7 @@ export const CreateImage = () => {
 const CreateImageContainer = styled.div`
   display: flex;
   width: 40rem;
-  height: 20rem;
+  height: 35rem;
   margin: 2rem 0 2rem 2rem;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ const CreateImageContainer = styled.div`
 `;
 
 const CreateImageInput = styled.input`
-  display: none;s
+  display: none;
 `;
 
 const CreateInputImage = styled.img`
