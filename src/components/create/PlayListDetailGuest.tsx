@@ -22,7 +22,7 @@ export const PlayListDetailGuest = () => {
 
   useEffect(() => {
     fetchPlayList();
-  }, [fetchedMusicList]);
+  }, []);
 
   return (
     <PlayListDetailContainer>

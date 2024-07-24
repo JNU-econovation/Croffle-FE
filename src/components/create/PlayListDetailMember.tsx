@@ -21,7 +21,7 @@ export const PlayListDetailMember = () => {
 
   useEffect(() => {
     fetchPlayList();
-  }, [fetchedMusicList]);
+  }, []);
 
   return (
     <PlayListDetailContainer>
