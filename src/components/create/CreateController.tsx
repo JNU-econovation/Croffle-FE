@@ -142,7 +142,7 @@ export const CreateController = () => {
               handleGenerateMusic({ speed, mood, place, strPrompt })
             }
           >
-            prompt 제출
+            음악 생성하기
           </GeneratePromptButton>
         </MusicStringPromptContainer>
       )}
@@ -261,12 +261,11 @@ const ChangeStepButton = styled.div`
 `;
 
 const GeneratePromptButton = styled.button`
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
-  display: block;
-  font-weight: 500;
-  color: #ffffff;
-  border-radius: 1rem;
+  margin-top: 2rem;
+  width: 10rem;
+  height: 2rem;
+  border: none;
+  border-radius: 1.25rem;
   background: linear-gradient(
     120deg,
     #dbbeff -0.41%,
@@ -274,6 +273,10 @@ const GeneratePromptButton = styled.button`
     rgba(219, 200, 243, 0.76) 35.4%,
     rgba(219, 200, 243, 0.76) 78.69%
   );
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
 `;
 
 const MusicStringPromptContainer = styled.div`
@@ -281,8 +284,6 @@ const MusicStringPromptContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 4rem;
-  margin-top: 3rem;
 `;
 
 const PromptInputContainer = styled.div`
@@ -290,7 +291,7 @@ const PromptInputContainer = styled.div`
   gap: 1rem;
   width: 40rem;
   height: 15rem;
-  margin: 2rem 0 2rem 2rem;
+  margin: 0 0 2rem 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
