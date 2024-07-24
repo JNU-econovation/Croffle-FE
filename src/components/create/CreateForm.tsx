@@ -31,7 +31,7 @@ export const CreateForm = () => {
                 : '이미지로 음악 생성하기'}
             </CreateModeControllButton>
           </FormTitle>
-          <PlayTab />
+          <PlayTab musicUrl="" />
         </SampleController>
         {isImageMode ? <CreateImage /> : <CreateController />}
       </CreateFormMain>
