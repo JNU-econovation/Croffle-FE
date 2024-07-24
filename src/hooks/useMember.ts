@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { BASE_URL, memberRequest } from '../api/https';
 
 export const useMember = () => {
-  const navigate = useNavigate();
   // const FRONT_URL = 'http://localhost:3000';
   const FRONT_URL = 'https://croffle-fe.vercel.app';
   const CLIENT_ID =
