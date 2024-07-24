@@ -8,8 +8,7 @@ import { getMyPlayList, Music } from '../../api/music';
 import PlayButton from '@img/playButton.svg';
 
 export const PlayListDetailMember = () => {
-  const { currentMusicId, isPlaying, playMusic, stopMusic, updateProgress } =
-    useAudio();
+  const { currentMusicId, playMusic, stopMusic } = useAudio();
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
   const fetchPlayList = async () => {
     try {
@@ -22,11 +21,7 @@ export const PlayListDetailMember = () => {
 
   useEffect(() => {
     fetchPlayList();
-    if (isPlaying) {
-      const intervalId = setInterval(updateProgress, 1000);
-      return () => clearInterval(intervalId);
-    }
-  }, [isPlaying, fetchedMusicList]);
+  }, [fetchedMusicList]);
 
   return (
     <PlayListDetailContainer>
