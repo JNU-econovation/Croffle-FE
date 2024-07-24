@@ -5,10 +5,12 @@ import './PlayList.css';
 import { useEffect, useState } from 'react';
 import musicImg from '@img/musicImg.svg';
 import { getMyPlayList, Music } from '../../api/music';
-import PlayButton from '@img/playButton.svg';
+import playButton from '@img/playButton.svg';
+import stopButton from '@img/stopButton.svg';
 
 export const PlayListDetailMember = () => {
-  const { currentMusicId, playMusic, stopMusic } = useAudio();
+  const { currentMusicId, playMusic, stopMusic, isPlaying, progress } =
+    useAudio();
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
   const fetchPlayList = async () => {
     try {
@@ -44,9 +46,19 @@ export const PlayListDetailMember = () => {
                       : () => playMusic(music)
                   }
                 >
-                  <img src={PlayButton} alt="Play button" />
+                  <img
+                    src={
+                      currentMusicId === music.musicId && isPlaying
+                        ? playButton
+                        : stopButton
+                    }
+                    alt="Play button"
+                  />
                 </button>
               </MusicPlayButton>
+              <ProgressBar>
+                <Progress style={{ width: `${progress}%` }}></Progress>
+              </ProgressBar>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -80,9 +92,12 @@ const MusicImg = styled.img`
 `;
 
 const MusicTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 14rem;
   height: 5rem;
-  margin: 0.75rem 0 0 1.5rem;
+  margin-left: 1rem;
   font-size: 1.2rem;
 `;
 
@@ -90,12 +105,23 @@ const MusicPlayButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 8rem;
   width: 5rem;
   height: 5rem;
   position: relative;
   img {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e0e0e0;
+  margin-top: 1rem;
+`;
+
+const Progress = styled.div`
+  height: 100%;
+  background-color: #3d1655;
 `;

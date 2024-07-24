@@ -4,13 +4,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../hooks/useAudio';
 import { getPlayList, Music } from '../../api/music';
 import musicImg from '@img/musicImg.svg';
-import PlayButton from '@img/playButton.svg';
+import playButton from '@img/playButton.svg';
+import stopButton from '@img/stopButton.svg';
+import { ProgressBar } from './ProgressBar';
+import './PlayList.css';
 
 export const PlayListDetailGuest = () => {
-  const { currentMusicId, playMusic, stopMusic } = useAudio();
+  const {
+    currentMusicId,
+    playMusic,
+    stopMusic,
+    isPlaying,
+    progress,
+    getCurrentMusicProgress,
+  } = useAudio();
 
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
-
   const fetchPlayList = async () => {
     try {
       const playList = await getPlayList();
@@ -24,6 +33,13 @@ export const PlayListDetailGuest = () => {
     fetchPlayList();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getCurrentMusicProgress();
+    }, 100);
+    return () => clearInterval(interval);
+  }, [currentMusicId]);
+
   return (
     <PlayListDetailContainer>
       <PlayListContainer>
@@ -35,19 +51,33 @@ export const PlayListDetailGuest = () => {
               initial={{ opacity: 0.8, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              <MusicImg src={musicImg} />
-              <MusicTitle>{music.title}</MusicTitle>
-              <MusicPlayButton>
-                <button
-                  onClick={
-                    currentMusicId === music.musicId
-                      ? stopMusic
-                      : () => playMusic(music)
-                  }
-                >
-                  <img src={PlayButton} alt="Play button" />
-                </button>
-              </MusicPlayButton>
+              <AudioElement>
+                <MusicImg src={musicImg} />
+                <MusicTitle>{music.title}</MusicTitle>
+                <MusicPlayButton>
+                  <button
+                    onClick={
+                      currentMusicId === music.musicId
+                        ? stopMusic
+                        : () => playMusic(music)
+                    }
+                  >
+                    <img
+                      src={
+                        currentMusicId === music.musicId && isPlaying
+                          ? playButton
+                          : stopButton
+                      }
+                      alt="Play button"
+                    />
+                  </button>
+                </MusicPlayButton>
+              </AudioElement>
+              <ProgressElement>
+                <ProgressBar
+                  progress={currentMusicId === music.musicId ? progress : 0}
+                />
+              </ProgressElement>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -81,9 +111,12 @@ const MusicImg = styled.img`
 `;
 
 const MusicTitle = styled.div`
-  width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
   height: 5rem;
-  margin: 0.75rem 0 0 1.5rem;
+  margin-left: 1rem;
   font-size: 1.2rem;
 `;
 
@@ -91,12 +124,25 @@ const MusicPlayButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 8rem;
   width: 5rem;
   height: 5rem;
   position: relative;
   img {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
+`;
+
+const AudioElement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+const ProgressElement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
