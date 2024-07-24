@@ -6,7 +6,7 @@ export const useGenerateQuery = () => {
     mutationKey: ['postFormData'],
     mutationFn: postFormData,
     onSuccess: () => {
-      alert('이미지가 업로드 되었습니다.');
+      alert('음악이 성공적으로 생성되었습니다.');
     },
     onError: () => {
       alert('이미지 업로드에 실패했습니다.');
