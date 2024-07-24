@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { PageLayout } from '../common/Layout';
 import bgImg from '@img/bgImg.png';
 import { ProcessButton } from './ProcessButton';
@@ -8,8 +7,6 @@ import { useMemberQuery } from '../../hooks/Query/useMemberQuery';
 
 export const Home = () => {
   const { isMember } = useMemberQuery();
-
-  useEffect(() => {}, [isMember]);
 
   return (
     <PageLayout>

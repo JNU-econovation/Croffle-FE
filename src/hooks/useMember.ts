@@ -31,7 +31,7 @@ export const useMember = () => {
       const response = res.data;
       if (response.success) {
         localStorage.setItem('accessToken', response.response.accessToken);
-        navigate('/'); // 로그인 후 리디렉션 경로 설정
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
