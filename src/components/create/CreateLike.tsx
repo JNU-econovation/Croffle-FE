@@ -5,6 +5,7 @@ import musicImg from '@img/musicImg.svg';
 import LikeBefore from '@img/LikeBefore.svg';
 import LikeAfter from '@img/LikeAfter.svg';
 import PlayButton from '@img/playButton.svg';
+import stopButton from '@img/stopButton.svg';
 import { postMusicLike } from '../../api/music';
 import { usePlayListQuery } from '../../hooks/Query/usePlayListQuery';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +17,7 @@ interface CreateLikeProps {
 }
 
 export const CreateLike = () => {
-  const { currentMusicId, playMusic, stopMusic } = useAudio();
+  const { currentMusicId, playMusic, stopMusic, isPlaying } = useAudio();
   const { popularPlayList, playList } = usePlayListQuery();
 
   const navigate = useNavigate();
@@ -73,7 +74,11 @@ export const CreateLike = () => {
                               : () => playMusic(music)
                           }
                         >
-                          <img src={PlayButton} alt="Play button" />
+                          {currentMusicId === music.musicId && isPlaying ? (
+                            <img src={PlayButton} alt="Play button" />
+                          ) : (
+                            <img src={stopButton} alt="Stop button" />
+                          )}
                         </button>
                       </MusicPlayButton>
                     </div>
@@ -108,7 +113,11 @@ export const CreateLike = () => {
                               : () => playMusic(music)
                           }
                         >
-                          <img src={PlayButton} alt="Play button" />
+                          {currentMusicId === music.musicId && isPlaying ? (
+                            <img src={PlayButton} alt="Play button" />
+                          ) : (
+                            <img src={stopButton} alt="Stop button" />
+                          )}
                         </button>
                       </MusicPlayButton>
                     </div>

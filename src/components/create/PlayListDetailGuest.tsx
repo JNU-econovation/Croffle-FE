@@ -16,7 +16,6 @@ export const PlayListDetailGuest = () => {
     playMusic,
     stopMusic,
     isPlaying,
-    // removeAudio,
     progress,
     getCurrentMusicProgress,
   } = useAudio();
