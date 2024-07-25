@@ -6,7 +6,7 @@ import {
   postMemberGenerateMusic,
 } from '../api/music';
 import { Music } from '../api/music';
-
+import { useNavigate } from 'react-router-dom';
 export interface PromptProps {
   speed: number;
   mood: string;
@@ -19,11 +19,13 @@ export interface GenerateStepProps {
 }
 
 export const useGenerate = () => {
+  const navigate = useNavigate();
   const [musics, setMusics] = useState<Music[]>([]);
   const [speed, setSpeed] = useState<PromptProps['speed']>(0);
   const [mood, setMood] = useState<PromptProps['mood']>('');
   const [place, setPlace] = useState<PromptProps['place']>('');
   const [strPrompt, setStrPrompt] = useState<PromptProps['strPrompt']>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [onNextStep, setOnNextStep] =
     useState<GenerateStepProps['onStep']>(false);
 
@@ -42,13 +44,14 @@ export const useGenerate = () => {
       prompt1: `속도가 ${speed}%로 분위기가 ${mood} 장소가 ${place}인 음악`,
       prompt2: `${strPrompt}`,
     };
-
     if (speed === 0 || mood === '' || place === '')
       return alert('모든 항목을 입력해주세요');
+    setIsLoading(true);
     const response = await postGenerateMusic(prompt);
     const musicUrl = response.response.musicUrl;
     localStorage.setItem('currentMusicUrl', musicUrl);
     fetchPlayList();
+    navigate('/createEnd');
   };
 
   const setMusicUrlLocalStorage = (musicUrl: string) => {
@@ -67,10 +70,12 @@ export const useGenerate = () => {
     };
     if (speed === 0 || mood === '' || place === '')
       return alert('모든 항목을 입력해주세요');
+    setIsLoading(true);
     const response = await postMemberGenerateMusic(prompt);
     const musicUrl = response.response.musicUrl;
     setMusicUrlLocalStorage(musicUrl);
     fetchPlayList();
+    navigate('/createEnd');
   };
 
   const readyOnNextStep = ({ speed, mood, place }: PromptProps) => {
@@ -79,6 +84,7 @@ export const useGenerate = () => {
   };
 
   return {
+    isLoading,
     promptState: { speed, mood, place, strPrompt },
     setPromptState: { setSpeed, setMood, setPlace, setStrPrompt },
     musicsState: { musics },

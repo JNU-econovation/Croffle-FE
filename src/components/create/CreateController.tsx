@@ -3,17 +3,19 @@ import './Create.css';
 import { PromptProps, useGenerate } from '../../hooks/useGenerate';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import playIcon2 from '@img/playIcon2.svg';
+import { useGenerateQuery } from '../../hooks/Query/useGenerateQuery';
+import { Loading } from './Loading';
 
 export const CreateController = () => {
   const [promptStep, setPromptStep] = useState<number>(1);
+  const [clickedButton1, setClickedButton1] = useState('');
+  const [clickedButton2, setClickedButton2] = useState('');
   const { promptState, setPromptState } = useGenerate();
   const { speed, mood, place, strPrompt } = promptState;
   const { setSpeed, setMood, setPlace, setStrPrompt } = setPromptState;
-  const { generateMusic } = useGenerate();
-  const { generateMemberMusic } = useGenerate();
-  const navigate = useNavigate();
+  const { generateMusicMutate, generateMemberMusicMutate, isLoading } =
+    useGenerateQuery();
+
   const handleSpeedInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     setSpeed(Number(value));
@@ -21,11 +23,13 @@ export const CreateController = () => {
   const handleMoodButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.value;
     setMood(value);
+    setClickedButton1(value);
   };
 
   const handlePlaceButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = e.currentTarget.value;
     setPlace(value);
+    setClickedButton2(value);
   };
 
   const handleStrPromptInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,12 +48,15 @@ export const CreateController = () => {
     strPrompt,
   }: PromptProps) => {
     if (localStorage.getItem('accessToken')) {
-      generateMemberMusic({ speed, mood, place, strPrompt });
+      generateMemberMusicMutate.mutate({ speed, mood, place, strPrompt });
     } else {
-      generateMusic({ speed, mood, place, strPrompt });
+      generateMusicMutate.mutate({ speed, mood, place, strPrompt });
     }
-    navigate('/createEnd');
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -77,52 +84,92 @@ export const CreateController = () => {
             <ControllerTitle>02</ControllerTitle>
             <ControllerSubtitle>분위기</ControllerSubtitle>
             <MusicMoodButtonContainer>
-              <MusicMoodButton value="편안한" onClick={handleMoodButton}>
+              <button
+                value="편안한"
+                onClick={handleMoodButton}
+                className={`create-button ${clickedButton1 === '편안한' ? 'create-button-after' : ''}`}
+              >
                 편안한
-              </MusicMoodButton>
-              <MusicMoodButton value="신나는" onClick={handleMoodButton}>
+              </button>
+              <button
+                value="신나는"
+                onClick={handleMoodButton}
+                className={`create-button ${clickedButton1 === '신나는' ? 'create-button-after' : ''}`}
+              >
                 신나는
-              </MusicMoodButton>
+              </button>
             </MusicMoodButtonContainer>
             <MusicMoodButtonContainer>
-              <MusicMoodButton value="잔잔한" onClick={handleMoodButton}>
+              <button
+                value="잔잔한"
+                onClick={handleMoodButton}
+                className={`create-button ${clickedButton1 === '잔잔한' ? 'create-button-after' : ''}`}
+              >
                 잔잔한
-              </MusicMoodButton>
-              <MusicMoodButton value="흥겨운" onClick={handleMoodButton}>
+              </button>
+              <button
+                value="흥겨운"
+                onClick={handleMoodButton}
+                className={`create-button ${clickedButton1 === '흥겨운' ? 'create-button-after' : ''}`}
+              >
                 흥겨운
-              </MusicMoodButton>
+              </button>
             </MusicMoodButtonContainer>
           </motion.div>
           <motion.div className="Controller" whileHover={{ scale: 1.3 }}>
             <ControllerTitle>03</ControllerTitle>
             <ControllerSubtitle>장소</ControllerSubtitle>
             <MusicPlaceButtonContainer>
-              <MusicPlaceButton value="집" onClick={handlePlaceButton}>
+              <button
+                value="집"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '집' ? 'create-button-after' : ''}`}
+              >
                 집
-              </MusicPlaceButton>
-              <MusicPlaceButton value="카페" onClick={handlePlaceButton}>
+              </button>
+              <button
+                value="카페"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '카페' ? 'create-button-after' : ''}`}
+              >
                 카페
-              </MusicPlaceButton>
+              </button>
             </MusicPlaceButtonContainer>
             <MusicPlaceButtonContainer>
-              <MusicPlaceButton value="산책" onClick={handlePlaceButton}>
+              <button
+                value="산책"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '산책' ? 'create-button-after' : ''}`}
+              >
                 산책
-              </MusicPlaceButton>
-              <MusicPlaceButton value="운동" onClick={handlePlaceButton}>
+              </button>
+              <button
+                value="운동"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '운동' ? 'create-button-after' : ''}`}
+              >
                 운동
-              </MusicPlaceButton>
+              </button>
             </MusicPlaceButtonContainer>
             <MusicPlaceButtonContainer>
-              <MusicPlaceButton value="학교" onClick={handlePlaceButton}>
+              <button
+                value="학교"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '학교' ? 'create-button-after' : ''}`}
+              >
                 학교
-              </MusicPlaceButton>
-              <MusicPlaceButton value="산" onClick={handlePlaceButton}>
+              </button>
+              <button
+                value="산"
+                onClick={handlePlaceButton}
+                className={`create-button ${clickedButton2 === '산' ? 'create-button-after' : ''}`}
+              >
                 산
-              </MusicPlaceButton>
+              </button>
             </MusicPlaceButtonContainer>
           </motion.div>
           <ChangeStepButton onClick={handlePromptStep}>
-            <img src={playIcon2} />
+            다음 단계
           </ChangeStepButton>
         </CreateControllerContainer>
       )}
@@ -136,14 +183,14 @@ export const CreateController = () => {
               onChange={handleStrPromptInput}
               value={strPrompt}
             />
+            <GeneratePromptButton
+              onClick={() =>
+                handleGenerateMusic({ speed, mood, place, strPrompt })
+              }
+            >
+              음악 생성하기
+            </GeneratePromptButton>
           </PromptInputContainer>
-          <GeneratePromptButton
-            onClick={() =>
-              handleGenerateMusic({ speed, mood, place, strPrompt })
-            }
-          >
-            음악 생성하기
-          </GeneratePromptButton>
         </MusicStringPromptContainer>
       )}
     </>
@@ -212,21 +259,6 @@ const MusicMoodButtonContainer = styled.div`
   gap: 1rem;
 `;
 
-const MusicMoodButton = styled.button`
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #ffffff;
-  border-radius: 1rem;
-  background: linear-gradient(
-    120deg,
-    #dbbeff -0.41%,
-    rgba(212, 210, 255, 0.98) 6.15%,
-    rgba(219, 200, 243, 0.76) 35.4%,
-    rgba(219, 200, 243, 0.76) 78.69%
-  );
-`;
-
 const MusicPlaceButtonContainer = styled.div`
   display: flex;
   width: 12rem;
@@ -236,33 +268,12 @@ const MusicPlaceButtonContainer = styled.div`
   gap: 1rem;
 `;
 
-const MusicPlaceButton = styled.button`
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
-  width: 4rem;
-  font-weight: 500;
-  color: #ffffff;
-  border-radius: 1rem;
-  background: linear-gradient(
-    120deg,
-    #dbbeff -0.41%,
-    rgba(212, 210, 255, 0.98) 6.15%,
-    rgba(219, 200, 243, 0.76) 35.4%,
-    rgba(219, 200, 243, 0.76) 78.69%
-  );
-`;
-
 const ChangeStepButton = styled.div`
-  margin-left: 2rem;
-  img {
-    width: 3rem;
-  }
-  cursor: pointer;
-`;
-
-const GeneratePromptButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 2rem;
-  width: 10rem;
+  width: 4rem;
   height: 2rem;
   border: none;
   border-radius: 1.25rem;
@@ -277,6 +288,36 @@ const GeneratePromptButton = styled.button`
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  text-align: center;
+  padding: 0.5rem;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.1);
+    background: white;
+  }
+`;
+
+const GeneratePromptButton = styled.button`
+  margin-top: 2rem;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    120deg,
+    #dbbeff -0.41%,
+    rgba(212, 210, 255, 0.98) 6.15%,
+    rgba(219, 200, 243, 0.76) 35.4%,
+    rgba(219, 200, 243, 0.76) 78.69%
+  );
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 2rem;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const MusicStringPromptContainer = styled.div`

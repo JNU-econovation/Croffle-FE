@@ -2,12 +2,11 @@ import { useGenerateQuery } from '../../hooks/Query/useGenerateQuery';
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import imageUpload from '../../assets/imageUpload.svg';
-import { useNavigate } from 'react-router-dom';
+import { Loading } from './Loading';
 
 export const CreateImage = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(new FormData());
-  const { handleImageUpload } = useGenerateQuery();
+  const { handleImageUpload, isLoading } = useGenerateQuery();
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files![0];
     const formData = new FormData();
@@ -20,16 +19,19 @@ export const CreateImage = () => {
     }
     formData.append('image', image);
     setFormData(formData);
-    navigate('/createEnd');
   };
 
   const addImage = () => {
     document.querySelector('input')?.click();
   };
 
-  const submitImage = () => {
-    handleImageUpload(formData);
+  const submitImage = async () => {
+    await handleImageUpload(formData);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <CreateImageContainer>
