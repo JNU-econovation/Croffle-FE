@@ -12,10 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useMemberQuery } from '../../hooks/Query/useMemberQuery';
 import './PlayList.css';
 
-interface CreateLikeProps {
-  musicId: number;
-}
-
 export const CreateLike = () => {
   const { currentMusicId, playMusic, stopMusic, isPlaying } = useAudio();
   const { popularPlayList, playList } = usePlayListQuery();
@@ -25,7 +21,7 @@ export const CreateLike = () => {
     navigate('/');
   };
 
-  const handleMusicLike = async ({ musicId }: CreateLikeProps) => {
+  const handleMusicLike = async (musicId: number) => {
     try {
       if (!isMember) {
         alert('로그인이 필요한 서비스입니다.');
