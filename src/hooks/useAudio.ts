@@ -34,6 +34,15 @@ export const useAudio = () => {
     setIsPlaying(false);
   };
 
+  const removeAudio = () => {
+    if (audio) {
+      audio.remove();
+      setAudio(null);
+    }
+    setCurrentMusicId(0);
+    setIsPlaying(false);
+  };
+
   const getCurrentMusicProgress = () => {
     if (audio) {
       const currentProgress = (audio.currentTime / audio.duration) * 100;
@@ -47,6 +56,7 @@ export const useAudio = () => {
     isPlaying,
     playMusic,
     stopMusic,
+    removeAudio,
     progress,
     setProgress,
     getCurrentMusicProgress,

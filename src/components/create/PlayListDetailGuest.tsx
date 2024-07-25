@@ -8,6 +8,7 @@ import playButton from '@img/playButton.svg';
 import stopButton from '@img/stopButton.svg';
 import { ProgressBar } from './ProgressBar';
 import './PlayList.css';
+import { useLocation } from 'react-router-dom';
 
 export const PlayListDetailGuest = () => {
   const {
@@ -15,11 +16,13 @@ export const PlayListDetailGuest = () => {
     playMusic,
     stopMusic,
     isPlaying,
+    removeAudio,
     progress,
     getCurrentMusicProgress,
   } = useAudio();
 
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
+  const location = useLocation();
   const fetchPlayList = async () => {
     try {
       const playList = await getPlayList();
@@ -32,6 +35,10 @@ export const PlayListDetailGuest = () => {
   useEffect(() => {
     fetchPlayList();
   }, []);
+
+  useEffect(() => {
+    stopMusic();
+  }, [location]);
 
   useEffect(() => {
     const interval = setInterval(() => {
