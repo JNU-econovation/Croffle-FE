@@ -6,10 +6,10 @@ import LikeBefore from '@img/LikeBefore.svg';
 import LikeAfter from '@img/LikeAfter.svg';
 import PlayButton from '@img/playButton.svg';
 import stopButton from '@img/stopButton.svg';
-import { postMusicLike } from '../../api/music';
 import { usePlayListQuery } from '../../hooks/Query/usePlayListQuery';
 import { useNavigate } from 'react-router-dom';
 import { useMemberQuery } from '../../hooks/Query/useMemberQuery';
+import { useLikeQuery } from '../../hooks/Query/useLikeQuery';
 import './PlayList.css';
 
 export const CreateLike = () => {
@@ -17,20 +17,16 @@ export const CreateLike = () => {
   const { popularPlayList, playList } = usePlayListQuery();
   const navigate = useNavigate();
   const { isMember } = useMemberQuery();
+  const { useLikeMutation } = useLikeQuery();
   const handleHome = () => {
     navigate('/');
   };
 
   const handleMusicLike = async (musicId: number) => {
-    try {
-      if (!isMember) {
-        alert('로그인이 필요한 서비스입니다.');
-      } else {
-        await postMusicLike({ musicId });
-        alert('해당 음악에 좋아요 표시를 했습니다.');
-      }
-    } catch (error) {
-      alert('이미 좋아요를 누른 음악입니다.');
+    if (!isMember) {
+      alert('로그인이 필요한 서비스입니다.');
+    } else {
+      useLikeMutation.mutate({ musicId });
     }
   };
 
