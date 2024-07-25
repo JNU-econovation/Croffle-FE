@@ -13,29 +13,27 @@ import './PlayList.css';
 
 interface CreateLikeProps {
   musicId: number;
-  isMember: boolean;
 }
 
 export const CreateLike = () => {
   const { currentMusicId, playMusic, stopMusic, isPlaying } = useAudio();
   const { popularPlayList, playList } = usePlayListQuery();
-
   const navigate = useNavigate();
+  const isMember = localStorage.getItem('isMember');
   const handleHome = () => {
     navigate('/');
   };
 
-  const handleMusicLike = async ({ musicId, isMember }: CreateLikeProps) => {
+  const handleMusicLike = async ({ musicId }: CreateLikeProps) => {
     try {
       await postMusicLike({ musicId });
-      alert('해당 음악에 좋아요 표시를 했습니다.');
-    } catch (error) {
       if (!isMember) {
         alert('로그인이 필요한 서비스입니다.');
-        return;
       } else {
-        alert('이미 좋아요를 누른 음악입니다.');
+        alert('해당 음악에 좋아요 표시를 했습니다.');
       }
+    } catch (error) {
+      alert('이미 좋아요를 누른 음악입니다.');
     }
   };
 

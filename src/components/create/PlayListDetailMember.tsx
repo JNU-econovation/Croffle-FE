@@ -7,10 +7,17 @@ import musicImg from '@img/musicImg.svg';
 import { getMyPlayList, Music } from '../../api/music';
 import playButton from '@img/playButton.svg';
 import stopButton from '@img/stopButton.svg';
+import { ProgressBar } from './ProgressBar';
 
 export const PlayListDetailMember = () => {
-  const { currentMusicId, playMusic, stopMusic, isPlaying, progress } =
-    useAudio();
+  const {
+    currentMusicId,
+    playMusic,
+    stopMusic,
+    isPlaying,
+    progress,
+    getCurrentMusicProgress,
+  } = useAudio();
   const [fetchedMusicList, setFetchedMusicList] = useState<Music[]>([]);
   const fetchPlayList = async () => {
     try {
@@ -25,6 +32,17 @@ export const PlayListDetailMember = () => {
     fetchPlayList();
   }, []);
 
+  useEffect(() => {
+    stopMusic();
+  }, [location]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getCurrentMusicProgress();
+    }, 100);
+    return () => clearInterval(interval);
+  }, [currentMusicId]);
+
   return (
     <PlayListDetailContainer>
       <PlayListContainer>
@@ -36,29 +54,33 @@ export const PlayListDetailMember = () => {
               initial={{ opacity: 0.8, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              <MusicImg src={musicImg} />
-              <MusicTitle>{music.title}</MusicTitle>
-              <MusicPlayButton>
-                <button
-                  onClick={
-                    currentMusicId === music.musicId
-                      ? stopMusic
-                      : () => playMusic(music)
-                  }
-                >
-                  <img
-                    src={
-                      currentMusicId === music.musicId && isPlaying
-                        ? playButton
-                        : stopButton
+              <AudioElement>
+                <MusicImg src={musicImg} />
+                <MusicTitle>{music.title}</MusicTitle>
+                <MusicPlayButton>
+                  <button
+                    onClick={
+                      currentMusicId === music.musicId
+                        ? stopMusic
+                        : () => playMusic(music)
                     }
-                    alt="Play button"
-                  />
-                </button>
-              </MusicPlayButton>
-              <ProgressBar>
-                <Progress style={{ width: `${progress}%` }}></Progress>
-              </ProgressBar>
+                  >
+                    <img
+                      src={
+                        currentMusicId === music.musicId && isPlaying
+                          ? playButton
+                          : stopButton
+                      }
+                      alt="Play button"
+                    />
+                  </button>
+                </MusicPlayButton>
+              </AudioElement>
+              <ProgressElement>
+                <ProgressBar
+                  progress={currentMusicId === music.musicId ? progress : 0}
+                />
+              </ProgressElement>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -114,14 +136,16 @@ const MusicPlayButton = styled.div`
   }
 `;
 
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 0.5rem;
-  background-color: #e0e0e0;
-  margin-top: 1rem;
+const AudioElement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 `;
 
-const Progress = styled.div`
-  height: 100%;
-  background-color: #3d1655;
+const ProgressElement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
