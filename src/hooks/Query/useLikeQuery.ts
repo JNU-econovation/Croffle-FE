@@ -1,11 +1,15 @@
 import { postMusicLike } from '../../api/music';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, QueryClient } from '@tanstack/react-query';
 
 export const useLikeQuery = () => {
+  const queryClient = new QueryClient();
   const useLikeMutation = useMutation({
     mutationKey: ['postMusicLike'],
     mutationFn: postMusicLike,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['playList', 'popularPlayList'],
+      });
       alert('해당 음악에 좋아요 표시를 했습니다.');
     },
     onError: () => {
