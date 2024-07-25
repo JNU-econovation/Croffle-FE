@@ -25,6 +25,7 @@ export interface GetMyPlayListRes {
   musicUrl: string;
   title: string;
   like: number;
+  pressed?: boolean;
 }
 
 export interface PostMusicLikeReq {
