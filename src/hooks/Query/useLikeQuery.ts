@@ -13,6 +13,7 @@ export const useLikeQuery = () => {
       queryClient.invalidateQueries({
         queryKey: ['popularPlayList'],
       });
+      window.location.reload();
       alert('해당 음악에 좋아요 표시를 했습니다.');
     },
     onError: () => {
