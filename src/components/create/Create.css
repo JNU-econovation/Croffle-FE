@@ -55,6 +55,7 @@ input[type='range']::-webkit-slider-runnable-track {
 .create-button {
   padding: 0.4rem 1rem;
   font-size: 1rem;
+  width: 5rem;
   font-weight: 500;
   color: #ffffff;
   border-radius: 1rem;
@@ -69,6 +70,7 @@ input[type='range']::-webkit-slider-runnable-track {
 
 .create-button-after {
   padding: 0.4rem 1rem;
+  width: 4.5rem;
   font-size: 1rem;
   font-weight: 500;
   color: #ffffff;
