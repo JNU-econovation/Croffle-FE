@@ -17,7 +17,7 @@ export interface GetPlayListRes {
   musicUrl: string;
   title: string;
   like: number;
-  pressed?: boolean;
+  pressed: boolean;
 }
 export interface GetMyPlayListRes {
   name: string;
@@ -25,7 +25,7 @@ export interface GetMyPlayListRes {
   musicUrl: string;
   title: string;
   like: number;
-  pressed?: boolean;
+  pressed: boolean;
 }
 
 export interface PostMusicLikeReq {

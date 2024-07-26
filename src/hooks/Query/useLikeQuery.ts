@@ -8,9 +8,11 @@ export const useLikeQuery = () => {
     mutationFn: postMusicLike,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['playList', 'popularPlayList'],
+        queryKey: ['playList'],
       });
-      window.location.reload();
+      queryClient.invalidateQueries({
+        queryKey: ['popularPlayList'],
+      });
       alert('해당 음악에 좋아요 표시를 했습니다.');
     },
     onError: () => {
