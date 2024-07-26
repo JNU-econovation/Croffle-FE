@@ -6,7 +6,7 @@ import { useGenerate } from '../useGenerate';
 
 export const useGenerateQuery = () => {
   const navigate = useNavigate();
-  const { generateMusic } = useGenerate();
+  const { generateMusic, generateMemberMusic } = useGenerate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const postFormDataMutation = useMutation({
@@ -45,7 +45,7 @@ export const useGenerateQuery = () => {
 
   const generateMemberMusicMutate = useMutation({
     mutationKey: ['generateMemberMusic'],
-    mutationFn: generateMusic,
+    mutationFn: generateMemberMusic,
     onMutate: () => {
       setIsLoading(true);
     },
