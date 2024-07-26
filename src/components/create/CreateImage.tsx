@@ -6,13 +6,16 @@ import { Loading } from './Loading';
 
 export const CreateImage = () => {
   const [formData, setFormData] = useState<FormData>(new FormData());
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { handleImageUpload, isLoading } = useGenerateQuery();
+
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image = e.target.files![0];
     const formData = new FormData();
     if (image) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
         alert('사진이 성공적으로 업로드되었습니다!');
       };
       reader.readAsDataURL(image);
@@ -40,11 +43,15 @@ export const CreateImage = () => {
         accept="image/*"
         onChange={handleChangeInput}
       />
-      <CreateInputImage
-        src={imageUpload}
-        alt="imageUpload"
-        onClick={addImage}
-      />
+      {previewUrl ? (
+        <CreateInputImage src={previewUrl} alt="Preview" />
+      ) : (
+        <CreateInputImage
+          src={imageUpload}
+          alt="imageUpload"
+          onClick={addImage}
+        />
+      )}
       <CreateImageButton onClick={submitImage}>
         사진으로 음악 생성하기
       </CreateImageButton>
@@ -73,7 +80,6 @@ const CreateImageInput = styled.input`
 const CreateInputImage = styled.img`
   width: 5rem;
   height: 5rem;
-  src: url(${imageUpload});
   cursor: pointer;
 `;
 
